@@ -1,0 +1,10 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "8501:8501"
+  backend:
+    image: tiangolo/uvicorn-gunicorn-fastapi:python3.12
+    volumes:
+      - ./app:/app
