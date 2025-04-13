@@ -1,8 +1,6 @@
-from sqlalchemy.ext.declarative import declarative_base
-
-from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, Text
 from sqlalchemy.orm import relationship
-Base = declarative_base()
+from session import Base
 
 
 class ChargerStatus(Base):
