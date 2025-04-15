@@ -1,11 +1,10 @@
 import uvicorn
 import asyncio
 from fastapi import FastAPI
+from session import Base, engine
 from utils import get_server_ip
 from routers.battery import router as battery_router
 from routers.announcements import router as announce_router
-
-
 
 
 routes = (battery_router,
@@ -15,6 +14,7 @@ routes = (battery_router,
 devices = []
 
 ip = get_server_ip()
+ip = "0.0.0.0"
 port = 21216
 
 
@@ -35,6 +35,7 @@ rbts = RBTS_backend(ip, port, routes)
 async def main():
     config = uvicorn.Config(rbts.app, host=ip, port=port)  # log_level="critical"
     server = uvicorn.Server(config)
+    Base.metadata.create_all(bind=engine)
     await server.serve()
 
 
