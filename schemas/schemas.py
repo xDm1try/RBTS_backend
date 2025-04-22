@@ -23,12 +23,11 @@ class ChargerStatus(BaseModel):
     low_battery_mV: int
 
 
-class HeartBeatResponse(BaseModel):
-
+class DeviceAnnounce(BaseModel):
     device_status: str
     device_name: str
     device_ip: str
-    charger_status: ChargerStatus
+    sd_free_mem: int
 
 
 class StartSensors(BaseModel):
