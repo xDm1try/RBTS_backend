@@ -42,8 +42,13 @@ class TestData(BaseModel):
     temp_load: int
     bat_voltage: int
     bat_current: int
+    load_voltage: int
+    load_current: int
     load_duty: int
     charge_status: str
+    const_current: int
+    const_voltage: int
+    time: int
 
 
 class SetDuty:

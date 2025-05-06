@@ -4,7 +4,7 @@ from fastapi import Depends
 
 from entities.device_announce import AnnounceHandler
 from schemas.schemas import DeviceAnnounce
-from schemas.test_actions import DeviceTestRequest
+# from schemas.test_actions import DeviceTestRequest
 
 from pprint import pprint as print
 
@@ -36,9 +36,9 @@ async def health():
     return {"status": "ok"}
 
 
-@router.get("/get_device_actions")
-async def get_device_list(test_request: DeviceTestRequest):
-    
+# @router.get("/get_device_actions")
+# async def get_device_list(test_request: DeviceTestRequest):
+#     ...
 
 
 # async def send_heartbeat(device_ip: str, device_port: int, message: str):
