@@ -3,8 +3,9 @@ from fastapi import APIRouter
 from fastapi import Depends
 
 from entities.device_announce import AnnounceHandler
+from entities.test_request_handler import TestRequestHandler
 from schemas.schemas import DeviceAnnounce
-# from schemas.test_actions import DeviceTestRequest
+from schemas.test_actions import DeviceTestRequest
 
 from pprint import pprint as print
 
@@ -13,9 +14,8 @@ router = APIRouter()
 announce_handler = AnnounceHandler()
 
 
-@router.get("/device_announce_route")
+@router.post("/device_announce_route")
 async def handle_announce_request(device: DeviceAnnounce):
-    print(device)
     announce_handler.add_device(new_device=device)
     return
 
@@ -36,17 +36,8 @@ async def health():
     return {"status": "ok"}
 
 
-# @router.get("/get_device_actions")
-# async def get_device_list(test_request: DeviceTestRequest):
-#     ...
-
-
-# async def send_heartbeat(device_ip: str, device_port: int, message: str):
-#     async with aiohttp.ClientSession() as session:
-
-#         async with session.get(f"http://{device_ip}:{device_port}/", json=message) as response:
-#             print(f"Status: {response.status}")
-#             body = await response.text()
-#             resp = json.loads(body)
-#             hb_resp = HeartBeatResponse(**resp)
-#             return hb_resp
+@router.post("/start_device_actions")
+async def get_device_list(test_request: DeviceTestRequest):
+    print(test_request.__dict__)
+    loop = asyncio.get_event_loop()
+    loop.create_task(TestRequestHandler.handle_test_request(test_request=test_request))

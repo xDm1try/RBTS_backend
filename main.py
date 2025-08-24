@@ -33,7 +33,7 @@ rbts = RBTS_backend(ip, port, routes)
 
 async def main():
     asyncio.create_task(announce_handler.announce_handler_loop())
-    config = uvicorn.Config(rbts.app, host=ip, port=port)  # log_level="critical"
+    config = uvicorn.Config(rbts.app, host=ip, port=port, log_level="critical")  # log_level="critical"
     server = uvicorn.Server(config)
     Base.metadata.create_all(bind=engine)
     await server.serve()
